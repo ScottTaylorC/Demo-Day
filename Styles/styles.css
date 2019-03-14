@@ -1,0 +1,27 @@
+body{
+    text-align: center;
+    background-color: white;
+    margin: 0 auto;
+}
+
+#Navigation{
+    border: 3px solid black;
+    background-color: gray;
+    position: sticky;
+}
+
+#Header{
+    background-color: darkgray;
+    margin: 0 auto;
+    font-size: 200%;
+    padding: 4%;
+    background-image: url("../Styles/space.png");
+}
+
+#Content{
+    background-color: lightgray;
+}
+
+#Footer{
+    background-color: darkgray;
+}
