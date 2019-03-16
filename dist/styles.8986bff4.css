@@ -1,22 +1,26 @@
 body{
     text-align: center;
-    background-color: green;
+    background-color: white;
+    margin: 0 auto;
 }
 
 #Navigation{
     border: 3px solid black;
-    margin: 10px;
-    background-color: red;
+    background-color: gray;
+    position: sticky;
 }
 
 #Header{
-    background-color: blue;
+    background-color: darkgray;
+    margin: 0 auto;
 }
 
 #Content{
-    background-color: brown;
+    background-color: lightgray;
 }
 
 #Footer{
-    background-color: yellow;
+    background-color: darkgray;
 }
+
+/*# sourceMappingURL=/styles.8986bff4.css.map */
