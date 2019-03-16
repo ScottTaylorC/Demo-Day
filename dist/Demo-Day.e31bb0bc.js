@@ -5,8 +5,6 @@
 //
 // anything defined in a previous bundle is accessed via the
 // orig method which is the require for previous bundles
-
-// eslint-disable-next-line no-global-assign
 parcelRequire = (function (modules, cache, entry, globalName) {
   // Save the require from previous bundle to this closure if any
   var previousRequire = typeof parcelRequire === 'function' && parcelRequire;
@@ -77,8 +75,16 @@ parcelRequire = (function (modules, cache, entry, globalName) {
     }, {}];
   };
 
+  var error;
   for (var i = 0; i < entry.length; i++) {
-    newRequire(entry[i]);
+    try {
+      newRequire(entry[i]);
+    } catch (e) {
+      // Save first error but execute all entries
+      if (!error) {
+        error = e;
+      }
+    }
   }
 
   if (entry.length) {
@@ -103,8 +109,15 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   // Override the current require with this new one
+  parcelRequire = newRequire;
+
+  if (error) {
+    // throw error from earlier, _after updating parcelRequire_
+    throw error;
+  }
+
   return newRequire;
-})({"src/Content.js":[function(require,module,exports) {
+})({"src/Navigation.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -113,21 +126,57 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = Content;
 
 function Content() {
-  return "\n    <div id=\"Content\">\n\n            <img>\n        \n            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam ex asperiores modi, accusantium libero veniam placeat magnam? Quisquam, voluptates enim nulla, dolore aperiam iusto, consectetur assumenda pariatur delectus excepturi itaque.</p>\n            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id asperiores quidem beatae fugiat repellendus qui. Veniam eveniet quasi iste labore eaque libero id aliquam est, accusamus culpa veritatis officia non.</p>\n            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa non ab minus. Beatae, voluptatem, sit saepe ratione ad accusamus sint corporis facilis at delectus natus doloremque labore incidunt dignissimos deleniti.</p>\n            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur facilis eum omnis vitae optio iusto expedita labore deserunt aspernatur. Tempore nesciunt non quae quas aut asperiores odio autem. Ipsum, iusto!</p>\n            <ul>\n                <li><a href=\"https://github.com/ScottTaylorC\">\n                    <i class=\"fab fa-github\"></i>\n                    GitHub</a>\n                </li>\n                <li><a href=\"https://twitter.com/dangermaster123\">\n                    <i class=\"fab fa-twitter\"></i>\n                    Twitter</a>\n                </li>\n                <li><a href=\"https://www.linkedin.com/\">\n                    <i class=\"fab fa-linkedin\"></i>\n                    Linkedin</a>\n                </li>\n            </ul>\n    </div>\n";
+  return "\n    <div id=\"Navigation\">\n         <ul>\n            <li id=\"Home\">Home</li>\n            <li id=\"AllGames\">All Games</li>\n         </ul>\n    </div>\n";
+}
+},{}],"src/Header.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = Content;
+
+function Content() {
+  return "\n    <div id=\"Header\">\n        Welcome to Collin's Game Review Website.\n    </div>\n";
+}
+},{}],"src/Content.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = Content;
+
+function Content() {
+  return "\n    <div id=\"Content\">\n        <li id=\"DarkSouls3\">\n            Name: Dark Souls 3\n            <p>Score: 9/10</p>\n            <p>Review: Dark Souls 3 is a good game</p>\n        </li>\n    </div>\n";
+}
+},{}],"src/Footer.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = Content;
+
+function Content() {
+  return "\n    <div id=\"Footer\">\n        Goodbye\n    </div>\n";
 }
 },{}],"index.js":[function(require,module,exports) {
 "use strict";
 
+var _Navigation = _interopRequireDefault(require("./src/Navigation"));
+
+var _Header = _interopRequireDefault(require("./src/Header"));
+
 var _Content = _interopRequireDefault(require("./src/Content"));
+
+var _Footer = _interopRequireDefault(require("./src/Footer"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var root = document.querySelector('#root');
-
-function render(state) {
-  root.innerHTML = " \n        ".concat(Navigation(state), "\n        ").concat(Header(state.title), "\n        ").concat(Footer(state), "\n        ").concat((0, _Content.default)(state), "\n    ");
-}
-},{"./src/Content":"src/Content.js"}],"../../../AppData/Roaming/npm-cache/_npx/6272/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+root.innerHTML = " \n    ".concat((0, _Header.default)(), "\n    ").concat((0, _Navigation.default)(), "\n    ").concat((0, _Content.default)(), "\n    ").concat((0, _Footer.default)(), "\n");
+},{"./src/Navigation":"src/Navigation.js","./src/Header":"src/Header.js","./src/Content":"src/Content.js","./src/Footer":"src/Footer.js"}],"../../../AppData/Roaming/npm-cache/_npx/7460/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -149,26 +198,46 @@ function Module(moduleName) {
 }
 
 module.bundle.Module = Module;
+var checkedAssets, assetsToAccept;
 var parent = module.bundle.parent;
 
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49343" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49308" + '/');
 
   ws.onmessage = function (event) {
+    checkedAssets = {};
+    assetsToAccept = [];
     var data = JSON.parse(event.data);
 
     if (data.type === 'update') {
-      console.clear();
-      data.assets.forEach(function (asset) {
-        hmrApply(global.parcelRequire, asset);
-      });
+      var handled = false;
       data.assets.forEach(function (asset) {
         if (!asset.isNew) {
-          hmrAccept(global.parcelRequire, asset.id);
+          var didAccept = hmrAcceptCheck(global.parcelRequire, asset.id);
+
+          if (didAccept) {
+            handled = true;
+          }
         }
+      }); // Enable HMR for CSS by default.
+
+      handled = handled || data.assets.every(function (asset) {
+        return asset.type === 'css' && asset.generated.js;
       });
+
+      if (handled) {
+        console.clear();
+        data.assets.forEach(function (asset) {
+          hmrApply(global.parcelRequire, asset);
+        });
+        assetsToAccept.forEach(function (v) {
+          hmrAcceptRun(v[0], v[1]);
+        });
+      } else {
+        window.location.reload();
+      }
     }
 
     if (data.type === 'reload') {
@@ -256,7 +325,7 @@ function hmrApply(bundle, asset) {
   }
 }
 
-function hmrAccept(bundle, id) {
+function hmrAcceptCheck(bundle, id) {
   var modules = bundle.modules;
 
   if (!modules) {
@@ -264,9 +333,27 @@ function hmrAccept(bundle, id) {
   }
 
   if (!modules[id] && bundle.parent) {
-    return hmrAccept(bundle.parent, id);
+    return hmrAcceptCheck(bundle.parent, id);
   }
 
+  if (checkedAssets[id]) {
+    return;
+  }
+
+  checkedAssets[id] = true;
+  var cached = bundle.cache[id];
+  assetsToAccept.push([bundle, id]);
+
+  if (cached && cached.hot && cached.hot._acceptCallbacks.length) {
+    return true;
+  }
+
+  return getParents(global.parcelRequire, id).some(function (id) {
+    return hmrAcceptCheck(global.parcelRequire, id);
+  });
+}
+
+function hmrAcceptRun(bundle, id) {
   var cached = bundle.cache[id];
   bundle.hotData = {};
 
@@ -291,10 +378,6 @@ function hmrAccept(bundle, id) {
 
     return true;
   }
-
-  return getParents(global.parcelRequire, id).some(function (id) {
-    return hmrAccept(global.parcelRequire, id);
-  });
 }
-},{}]},{},["../../../AppData/Roaming/npm-cache/_npx/6272/node_modules/parcel/src/builtins/hmr-runtime.js","index.js"], null)
-//# sourceMappingURL=/Demo-Day.e31bb0bc.map
+},{}]},{},["../../../AppData/Roaming/npm-cache/_npx/7460/node_modules/parcel/src/builtins/hmr-runtime.js","index.js"], null)
+//# sourceMappingURL=/Demo-Day.e31bb0bc.js.map
