@@ -148,7 +148,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = Content;
 
 function Content() {
-  return "\n    <div id=\"Content\">\n        <li id=\"DarkSouls3\">\n            Name: Dark Souls 3\n            <p>Score: 9/10</p>\n            <p>Review: Dark Souls 3 is a good game</p>\n        </li>\n    </div>\n";
+  return "\n    <div id=\"Content\">\n    </div>\n";
 }
 },{}],"src/Footer.js":[function(require,module,exports) {
 "use strict";
@@ -1830,13 +1830,38 @@ root.innerHTML = " \n    ".concat((0, _Header.default)(), "\n    ").concat((0, _
     'Accept': 'application/json',
     'user-key': 'f240634775f56f976cbbd49510dd14e3'
   },
-  data: "fields age_ratings;"
+  data: "fields *;"
 }).then(function (response) {
   console.log(response.data);
+  var content = document.getElementById('Content');
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
+
+  try {
+    for (var _iterator = response.data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var game = _step.value;
+      console.log(game);
+      content.innerHTML += "\n            <li id=\"".concat(game.slug, "\" class=\"game-item\">\n                Name: ").concat(game.name, "\n                <p>Score: ").concat(game.popularity, "/10</p>\n                <p>Review: ").concat(game.summary, "</p>\n            </li>           \n            ");
+    }
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator.return != null) {
+        _iterator.return();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
+  }
 }).catch(function (err) {
   console.error(err);
 });
-},{"./src/Navigation":"src/Navigation.js","./src/Header":"src/Header.js","./src/Content":"src/Content.js","./src/Footer":"src/Footer.js","axios":"node_modules/axios/index.js"}],"../../../AppData/Roaming/npm-cache/_npx/3852/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./src/Navigation":"src/Navigation.js","./src/Header":"src/Header.js","./src/Content":"src/Content.js","./src/Footer":"src/Footer.js","axios":"node_modules/axios/index.js"}],"../../../AppData/Roaming/npm-cache/_npx/6320/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -1864,7 +1889,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49273" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49528" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -2039,5 +2064,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../AppData/Roaming/npm-cache/_npx/3852/node_modules/parcel/src/builtins/hmr-runtime.js","index.js"], null)
+},{}]},{},["../../../AppData/Roaming/npm-cache/_npx/6320/node_modules/parcel/src/builtins/hmr-runtime.js","index.js"], null)
 //# sourceMappingURL=/Demo-Day.e31bb0bc.js.map

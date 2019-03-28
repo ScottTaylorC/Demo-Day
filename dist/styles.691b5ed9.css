@@ -26,8 +26,7 @@ body{
     background-color: darkgray;
 }
 
-#DarkSouls3{
-    margin-top: 1px;
+.game-item {
     border: 3px solid black;
     background-color: red;
     font-size: 150%;
@@ -37,9 +36,9 @@ body{
     grid-auto-rows: minmax(10px, auto);
 }
 
-#DarkSouls3 > p{
+.game-item > p{
     background-color: beige;
-    border: 3px dotted black;
+    border: 3px solid black;
     /* display: grid;
     grid-template-columns: 100%;
     grid-template-rows: 12px 5px; */

@@ -21,10 +21,22 @@ axios({
         'Accept': 'application/json',
         'user-key': 'f240634775f56f976cbbd49510dd14e3',
     },
-    data: "fields age_ratings;"
+    data: "fields *;"
   })
     .then(response => {
         console.log(response.data);
+        var content = document.getElementById('Content');
+        for(const game of response.data) {
+            console.log(game);
+            content.innerHTML += `
+            <li id="${game.slug}" class="game-item">
+                Name: ${game.name}
+                <p>Score: ${game.popularity}/10</p>
+                <p>Review: ${game.summary}</p>
+            </li>           
+            `;
+        }
+
     })
     .catch(err => {
         console.error(err);
