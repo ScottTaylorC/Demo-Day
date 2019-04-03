@@ -15,7 +15,7 @@ root.innerHTML = `
 
 
 axios({
-    url: "https://cors-anywhere.herokuapp.com/https://api-v3.igdb.com/games",
+    url: "https://cors-anywhere.herokuapp.com/https://api-v3.igdb.com/games/?search=dark_souls&fields=name,summary,storyline,rating,cover",
     method: 'POST',
     headers: {
         'Accept': 'application/json',
@@ -31,7 +31,8 @@ axios({
             content.innerHTML += `
             <li id="${game.slug}" class="game-item">
                 Name: ${game.name}
-                <p>Score: ${game.popularity}/10</p>
+                <p>Cover: ${game.cover}</p>
+                <p>Score: ${game.rating}/100</p>
                 <p>Review: ${game.summary}</p>
             </li>           
             `;

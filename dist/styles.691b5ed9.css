@@ -28,7 +28,7 @@ body{
 
 .game-item {
     border: 3px solid black;
-    background-color: red;
+    background-color: lightgrey;
     font-size: 150%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
