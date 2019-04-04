@@ -13,27 +13,27 @@ root.innerHTML = `
     ${Footer()}
 `;
 
-
 axios({
-    url: "https://cors-anywhere.herokuapp.com/https://api-v3.igdb.com/games/?search=dark_souls&fields=name,summary,storyline,rating,cover",
+    url: "https://cors-anywhere.herokuapp.com/https://api-v3.igdb.com/games",
     method: 'POST',
     headers: {
         'Accept': 'application/json',
         'user-key': 'f240634775f56f976cbbd49510dd14e3',
     },
-    data: "fields *;"
+    data: "fields *; where id = (11133,1026);"
   })
     .then(response => {
         console.log(response.data);
         var content = document.getElementById('Content');
         for(const game of response.data) {
             console.log(game);
+            var rating = game.total_rating;
+            rating = Math.round(rating*1) /1;
             content.innerHTML += `
-            <li id="${game.slug}" class="game-item">
-                Name: ${game.name}
-                <p>Cover: ${game.cover}</p>
-                <p>Score: ${game.rating}/100</p>
-                <p>Review: ${game.summary}</p>
+            <li id="${game}" class="game-home">
+                <h1>Name: ${game.name}</h2>
+                <p>Score: ${rating}/100</p>
+                <p2>Review: ${game.summary}</p2>
             </li>           
             `;
         }

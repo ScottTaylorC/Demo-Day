@@ -1824,13 +1824,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var root = document.querySelector('#root');
 root.innerHTML = " \n    ".concat((0, _Header.default)(), "\n    ").concat((0, _Navigation.default)(), "\n    ").concat((0, _Content.default)(), "\n    ").concat((0, _Footer.default)(), "\n");
 (0, _axios.default)({
-  url: "https://cors-anywhere.herokuapp.com/https://api-v3.igdb.com/games/?search=dark_souls&fields=name,summary,storyline,rating,cover",
+  url: "https://cors-anywhere.herokuapp.com/https://api-v3.igdb.com/games",
   method: 'POST',
   headers: {
     'Accept': 'application/json',
     'user-key': 'f240634775f56f976cbbd49510dd14e3'
   },
-  data: "fields *;"
+  data: "fields *; where id = (11133,1026);"
 }).then(function (response) {
   console.log(response.data);
   var content = document.getElementById('Content');
@@ -1842,7 +1842,9 @@ root.innerHTML = " \n    ".concat((0, _Header.default)(), "\n    ").concat((0, _
     for (var _iterator = response.data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
       var game = _step.value;
       console.log(game);
-      content.innerHTML += "\n            <li id=\"".concat(game.slug, "\" class=\"game-item\">\n                Name: ").concat(game.name, "\n                <p>Cover: ").concat(game.cover, "</p>\n                <p>Score: ").concat(game.rating, "/100</p>\n                <p>Review: ").concat(game.summary, "</p>\n            </li>           \n            ");
+      var rating = game.total_rating;
+      rating = Math.round(rating * 1) / 1;
+      content.innerHTML += "\n            <li id=\"".concat(game, "\" class=\"game-home\">\n                <h1>Name: ").concat(game.name, "</h2>\n                <p>Score: ").concat(rating, "/100</p>\n                <p2>Review: ").concat(game.summary, "</p2>\n            </li>           \n            ");
     }
   } catch (err) {
     _didIteratorError = true;
@@ -1861,7 +1863,7 @@ root.innerHTML = " \n    ".concat((0, _Header.default)(), "\n    ").concat((0, _
 }).catch(function (err) {
   console.error(err);
 });
-},{"./src/Navigation":"src/Navigation.js","./src/Header":"src/Header.js","./src/Content":"src/Content.js","./src/Footer":"src/Footer.js","axios":"node_modules/axios/index.js"}],"../../../AppData/Roaming/npm-cache/_npx/6168/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./src/Navigation":"src/Navigation.js","./src/Header":"src/Header.js","./src/Content":"src/Content.js","./src/Footer":"src/Footer.js","axios":"node_modules/axios/index.js"}],"../../../AppData/Roaming/npm-cache/_npx/2688/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -1889,7 +1891,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49344" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49571" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -2064,5 +2066,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../AppData/Roaming/npm-cache/_npx/6168/node_modules/parcel/src/builtins/hmr-runtime.js","index.js"], null)
+},{}]},{},["../../../AppData/Roaming/npm-cache/_npx/2688/node_modules/parcel/src/builtins/hmr-runtime.js","index.js"], null)
 //# sourceMappingURL=/Demo-Day.e31bb0bc.js.map
