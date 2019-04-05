@@ -3,15 +3,35 @@ import Header from './src/Header';
 import Content from './src/Content';
 import Footer from './src/Footer';
 import axios from 'axios';
+// import Navigo from 'navigo';
+// import * as State from './state';
+// import { startCase } from 'lodash';
 
 var root = document.querySelector('#root');
+// var router = new Navigo(location.origin);
 
-root.innerHTML = ` 
-    ${Header()}
-    ${Navigation()}
-    ${Content()}
-    ${Footer()}
-`;
+// function render(){
+    root.innerHTML = ` 
+        ${Navigation()}
+        ${Header()}
+        ${Content()}
+        ${Footer()}
+    `;
+
+
+//     router.updatePageLinks();
+// }
+
+// function navHandler(params){
+//     var destination = startCase(params.page);
+
+//     render(State[destination]);
+// }
+
+// router
+//     .on('/:page', navHandler)
+//     .on('/', () => navHandler({ 'page': 'Home' }))
+//     .resolve();
 
 axios({
     url: "https://cors-anywhere.herokuapp.com/https://api-v3.igdb.com/games",
@@ -20,7 +40,7 @@ axios({
         'Accept': 'application/json',
         'user-key': 'f240634775f56f976cbbd49510dd14e3',
     },
-    data: "fields *; where id = (11133,1026);"
+    data: "fields *; where id = (11133,1011,7360);"
   })
     .then(response => {
         console.log(response.data);
